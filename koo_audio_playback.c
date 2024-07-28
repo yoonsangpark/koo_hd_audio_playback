@@ -287,10 +287,9 @@ retry:
 		elapse_time = TIME_DIFF(hd_gettime_ms(), start_time);
 		au_buf_time = data_time - elapse_time;
 		if (au_buf_time > AUD_BUFFER_CNT * au_frame_ms) {
-			usleep(au_frame_ms);
-			goto retry;
+			//usleep(au_frame_ms);
+			//goto retry;
 		}
-
 		/* check bs buf rollback */
 		if ((bs_buf_curr + (unsigned long)bs_size) > bs_buf_end) {
 			bs_buf_curr = bs_buf_start;
