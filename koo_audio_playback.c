@@ -45,9 +45,10 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
-#define AUDOUT_SR       HD_AUDIO_SR_32000 //HD_AUDIO_SR_48000
+//#define AUDOUT_SR       HD_AUDIO_SR_32000 //HD_AUDIO_SR_48000
+#define AUDOUT_SR       HD_AUDIO_SR_16000
 #define AUDOUT_BIT      HD_AUDIO_BIT_WIDTH_16
-#define AUDOUT_MODE     HD_AUDIO_SOUND_MODE_STEREO //HD_AUDIO_SOUND_MODE_STEREO
+#define AUDOUT_MODE     HD_AUDIO_SOUND_MODE_MONO //HD_AUDIO_SOUND_MODE_STEREO
 #define AUDOUT_MONO     HD_AUDIO_MONO_LEFT
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -217,7 +218,7 @@ static void *playback_thread(void *arg)
 	int nLength = 0, play_size = 0;
 
 	/* read test pattern */
-	snprintf(filename, sizeof(filename), "/mnt/sd/sample.pcm"); 
+	snprintf(filename, sizeof(filename), "/mnt/sd/snd001.pcm"); 
 	lstat(filename, &st);
 	nLength = st.st_size;
 
