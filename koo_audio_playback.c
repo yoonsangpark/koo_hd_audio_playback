@@ -51,6 +51,7 @@
 #define AUDOUT_MODE     HD_AUDIO_SOUND_MODE_MONO //HD_AUDIO_SOUND_MODE_STEREO
 #define AUDOUT_MONO     HD_AUDIO_MONO_LEFT
 
+#define SND_FILENAME	"/rsc/snd/snd001.pcm"
 ///////////////////////////////////////////////////////////////////////////////
 
 static int mem_init(void)
@@ -218,7 +219,7 @@ static void *playback_thread(void *arg)
 	int nLength = 0, play_size = 0;
 
 	/* read test pattern */
-	snprintf(filename, sizeof(filename), "/mnt/sd/snd001.pcm"); 
+	snprintf(filename, sizeof(filename), SND_FILENAME); 
 	lstat(filename, &st);
 	nLength = st.st_size;
 
@@ -319,6 +320,10 @@ resend:
 		if (play_size <= 0) {
 			play_size = nLength;
 			bs_buf_curr = bs_buf_start;
+
+			/* ooSSoo */
+			break;
+
 		}
 	}
 
@@ -342,7 +347,7 @@ play_fclose:
 EXAMFUNC_ENTRY(hd_audio_output_only, argc, argv)
 {
 	HD_RESULT ret;
-	INT key;
+	//INT key;
 	pthread_t out_thread_id;
 	AUDIO_OUTONLY outonly = {0};
 
@@ -389,6 +394,8 @@ EXAMFUNC_ENTRY(hd_audio_output_only, argc, argv)
 	//start output module
 	hd_audioout_start(outonly.out_path);
 
+
+#if 0
 	printf("Enter q to exit\n");
 	while (1) {
 		key = NVT_EXAMSYS_GETCHAR();
@@ -409,7 +416,7 @@ EXAMFUNC_ENTRY(hd_audio_output_only, argc, argv)
 		}
 		#endif
 	}
-
+#endif
 	pthread_join(out_thread_id, NULL);
 
 	//stop output module
